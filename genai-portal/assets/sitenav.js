@@ -86,6 +86,23 @@
       ]
     },
     {
+      id: "atslab",
+      label: "ATS Agent Build Lab",
+      mark: "T",
+      blurb: "Applied recruitment agents",
+      home: "genai-portal/ats-agent-lab/index.html",
+      pages: [
+        { path: "genai-portal/ats-agent-lab/index.html", title: "Lab overview", num: "✦", kw: "ats recruitment hackathon agent lab overview six agents" },
+        { path: "genai-portal/ats-agent-lab/01-system-map.html", title: "System map & stack", num: "01", kw: "architecture layers fastapi pydantic postgres react stack bounded agents" },
+        { path: "genai-portal/ats-agent-lab/02-shared-client.html", title: "Shared LLM client", num: "02", kw: "anthropic client json pydantic retry repair timeout tracing" },
+        { path: "genai-portal/ats-agent-lab/03-recruitment-agents.html", title: "Recruiting agents", num: "03", kw: "jd creation resume screening candidate matching skills evidence" },
+        { path: "genai-portal/ats-agent-lab/04-interview-agents.html", title: "Interview agents", num: "04", kw: "scheduling questions feedback summarization deterministic conflict" },
+        { path: "genai-portal/ats-agent-lab/05-production-safety.html", title: "Safety & human control", num: "05", kw: "security prompt injection privacy rbac human in loop guardrails audit" },
+        { path: "genai-portal/ats-agent-lab/06-optimization-evals.html", title: "Optimization & evals", num: "06", kw: "tokens caching latency cost evaluation llmops testing metrics" },
+        { path: "genai-portal/ats-agent-lab/07-build-from-scratch.html", title: "Build from scratch", num: "07", kw: "python fastapi tutorial capstone build agent service code" }
+      ]
+    },
+    {
       id: "deepdives",
       label: "Deep Dives",
       mark: "D",

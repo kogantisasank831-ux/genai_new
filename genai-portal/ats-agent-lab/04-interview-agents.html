@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f5f8">
+<title>Build the Interview Agents — ATS Agent Build Lab</title>
+<meta name="description" content="Build interview scheduling, tailored question generation and feedback summarization with deterministic safety checks.">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-page="ats-04" data-ats-lesson="04">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="brand-mark">G</div><div class="brand-text"><strong>GenAI Learning Hub</strong><span>ATS Agent Build Lab</span></div></a></div>
+    <div class="search-wrap"><div class="search-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" data-search placeholder="Search everything…  ( / )"></div><div class="search-results"></div></div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">ATS Agent Build Lab / <b>Build the Interview Agents</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content ats-content">
+        <div class="eyebrow"><span class="dot"></span> Lesson 04 · Human-centered interview flow</div>
+        <h1>Build the Interview Agents</h1>
+        <p class="lead">See where AI helps panels prepare and synthesize—and where ordinary Python must remain in charge.</p>
+        <div class="meta-row"><span class="pill blue">⏱ 40 min</span><span class="pill">Intermediate</span><span class="pill purple">Based on the uploaded ATS app</span></div>
+        
+<h2 id="flow">1 · The interview intelligence loop</h2>
+<div class="diagram ats-diagram" data-reveal><svg viewBox="0 0 900 350" role="img" aria-label="Interview agents and deterministic checks">
+<defs><marker id="ivArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+<rect class="flow-node-accent" x="32" y="40" width="170" height="64" rx="14"/><text class="flow-label" x="117" y="66" text-anchor="middle">Availability</text><text class="flow-sub" x="117" y="86" text-anchor="middle">candidate + panel</text>
+<rect class="flow-node" x="250" y="40" width="170" height="64" rx="14"/><text class="flow-label" x="335" y="66" text-anchor="middle">Scheduling agent</text><text class="flow-sub" x="335" y="86" text-anchor="middle">ranked proposals</text>
+<rect class="flow-node-accent" x="468" y="40" width="180" height="64" rx="14"/><text class="flow-label" x="558" y="66" text-anchor="middle">Python verifier</text><text class="flow-sub" x="558" y="86" text-anchor="middle">overlap check</text>
+<rect class="flow-node-accent" x="696" y="40" width="170" height="64" rx="14"/><text class="flow-label" x="781" y="66" text-anchor="middle">Human picks slot</text><text class="flow-sub" x="781" y="86" text-anchor="middle">create interview</text>
+<path class="flow-arrow" d="M202,72 L248,72" style="stroke:var(--accent);marker-end:url(#ivArrow)"/><path class="flow-arrow" d="M420,72 L466,72" style="stroke:var(--accent);marker-end:url(#ivArrow)"/><path class="flow-arrow" d="M648,72 L694,72" style="stroke:var(--accent);marker-end:url(#ivArrow)"/>
+<rect class="flow-node" x="32" y="246" width="170" height="64" rx="14"/><text class="flow-label" x="117" y="272" text-anchor="middle">CV + JD + round</text><text class="flow-sub" x="117" y="292" text-anchor="middle">prior focus injected</text>
+<rect class="flow-node" x="250" y="246" width="170" height="64" rx="14"/><text class="flow-label" x="335" y="272" text-anchor="middle">Question agent</text><text class="flow-sub" x="335" y="292" text-anchor="middle">8–12 grounded prompts</text>
+<rect class="flow-node" x="468" y="246" width="180" height="64" rx="14"/><text class="flow-label" x="558" y="272" text-anchor="middle">Panel feedback</text><text class="flow-sub" x="558" y="292" text-anchor="middle">ratings + notes</text>
+<rect class="flow-node-accent" x="696" y="246" width="170" height="64" rx="14"/><text class="flow-label" x="781" y="272" text-anchor="middle">Summary agent</text><text class="flow-sub" x="781" y="292" text-anchor="middle">neutral synthesis</text>
+<path class="flow-arrow" d="M202,278 L248,278" style="stroke:var(--accent);marker-end:url(#ivArrow)"/><path class="flow-arrow" d="M420,278 L466,278" style="stroke:var(--accent);marker-end:url(#ivArrow)"/><path class="flow-arrow" d="M648,278 L694,278" style="stroke:var(--accent);marker-end:url(#ivArrow)"/>
+<path class="flow-arrow flow-dash" d="M781,106 C781,168 117,168 117,244" style="stroke:var(--text-muted);marker-end:url(#ivArrow)"/><text class="flow-sub" x="450" y="160" text-anchor="middle">scheduled interview starts the preparation loop</text>
+</svg><div class="diagram-caption">Scheduling is a hybrid AI + deterministic workflow. Questions prepare the panel; summarization carries evidence forward without rewriting the panel decision.</div></div>
+
+<h2 id="schedule">2 · Agent D — interview scheduling</h2>
+<p>The model is useful for ranking human-friendly options and explaining trade-offs. It is <strong>not</strong> trusted as the final collision detector.</p>
+<div class="code-block" data-reveal>
+  <div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> services/scheduling_simplified.py</span><button class="copy-btn">Copy</button></div>
+  <pre><code>def overlaps(start_a, end_a, start_b, end_b) -&gt; bool:
+    return start_a &lt; end_b and start_b &lt; end_a
+
+async def suggest_slots(db, request):
+    busy = await load_panel_busy_intervals(db, request.panelist_ids)
+    result = await interview_scheduling.run(
+        candidate_windows=serialize(request.candidate_windows),
+        panelists=serialize_busy(busy),
+        round=request.round,
+    )
+
+    for proposal in result[&quot;proposals&quot;]:
+        start, end = parse_iso(proposal[&quot;start&quot;]), parse_iso(proposal[&quot;end&quot;])
+        proposal[&quot;verified&quot;] = bool(
+            start and end and end &gt; start and
+            not any(overlaps(start, end, b_start, b_end)
+                    for intervals in busy.values()
+                    for b_start, b_end in intervals)
+        )
+    return result</code></pre>
+</div>
+<div class="callout key"><div class="c-ico">🛡️</div><div class="c-body"><div class="c-title">The most important pattern in this course</div><p><strong>Use AI for judgment; use code for invariants.</strong> Date overlap is deterministic, so Python must verify it. Similar examples: permissions, numeric thresholds, duplicate IDs, legal state transitions and required fields.</p></div></div>
+
+<h2 id="questions">3 · Agent E — tailored interview questions</h2>
+<p>The agent generates 8–12 questions for the current round. Technical rounds probe technical depth; the management round shifts to behavioral and leadership evidence.</p>
+<div class="code-block" data-reveal>
+  <div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> services/question_generation.py</span><button class="copy-btn">Copy</button></div>
+  <pre><code>async def generate_questions(interview, application):
+    prior = await load_prior_round_feedback(interview.application_id,
+                                            before_round=interview.round)
+    focus = collect_weaknesses_and_next_focus(prior)
+
+    result = await interview_questions.run(
+        round=interview.round,
+        position_title=application.rrf.position_title,
+        jd_markdown=latest_jd(application.rrf),
+        essential_skills=essential_skills(application.rrf),
+        cv_text=application.candidate.cv_text[:12_000],
+        prior_round_focus=focus,  # server-controlled, not supplied by browser
+    )
+    interview.ai_interview_questions = result  # cache for the panel
+    return result</code></pre>
+</div>
+<div class="grid grid-3"><div class="card"><h4>Grounded</h4><p>Each question ties back to a claim in the CV or a requirement in the JD.</p></div><div class="card"><h4>Round-aware</h4><p>R2 goes deeper than R1; management avoids low-level coding.</p></div><div class="card"><h4>Continuity-aware</h4><p>Weaknesses and next-round focus are injected by the server.</p></div></div>
+
+<h2 id="background">4 · Generate preparation asynchronously</h2>
+<div class="code-block" data-reveal>
+  <div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> services/question_background_task.py</span><button class="copy-btn">Copy</button></div>
+  <pre><code>async def generate_questions_in_background(interview_id, user_id):
+    # The interview is already committed. AI preparation is best-effort.
+    try:
+        async with SessionLocal() as db:
+            interview = await interview_repo.get_by_id(db, interview_id)
+            if not interview or interview.ai_interview_questions is not None:
+                return
+            await generate_questions(db, user_id, interview_id)
+    except Exception:
+        logger.warning(&quot;question pre-generation failed&quot;, exc_info=True)
+        # Do not cancel or corrupt the scheduled interview.</code></pre>
+</div>
+<p>The uploaded app pre-generates questions after scheduling, in its own session, and skips work if questions are already cached. A provider outage cannot undo a successfully scheduled interview.</p>
+
+<h2 id="summary">5 · Agent F — feedback summarization</h2>
+<p>The summarizer combines overall rating, skill ratings, category assessments, raw notes and earlier round summaries. It is instructed to remain neutral and to echo—not invent—the final recommendation.</p>
+<div class="code-block" data-reveal>
+  <div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> services/feedback_summary.py</span><button class="copy-btn">Copy</button></div>
+  <pre><code>async def summarize_feedback(interview, feedback):
+    prior = await load_prior_round_feedback(interview.application_id,
+                                            before_round=interview.round)
+    return await feedback_summarization.run(
+        round=interview.round,
+        overall_rating=feedback.overall_rating,
+        recommendation=feedback.recommendation,
+        skill_ratings=feedback.skill_ratings,
+        attributes=feedback.attributes,
+        raw_notes=(feedback.raw_notes or &quot;&quot;)[:6_000],
+        prior_round_summaries=prior,
+    )</code></pre>
+</div>
+<div class="callout note"><div class="c-ico">🔒</div><div class="c-body"><div class="c-title">Why prior feedback is server-injected</div><p>The browser should not choose which earlier feedback the model sees. The service applies application, round and role rules, then injects only authorized prior summaries. This reduces tampering and accidental data leakage.</p></div></div>
+
+<h2 id="practices">6 · Best practices demonstrated here</h2>
+<ul class="ats-checklist"><li>Advisory scheduling plus deterministic non-overlap verification.</li><li>Panel size limited before agent invocation.</li><li>Prior-round context selected by server-side authorization logic.</li><li>Question results cached on the interview.</li><li>Background generation is best-effort and idempotent.</li><li>Original ratings and recommendation stay as source of truth.</li><li>Audit record written when generated questions are persisted.</li></ul>
+
+<h2 id="improve">7 · Production upgrades</h2>
+<div class="table-wrap"><table><thead><tr><th>Upgrade</th><th>Implementation idea</th></tr></thead><tbody>
+<tr><td>Timezone correctness</td><td>Normalize to aware UTC datetimes and evaluate working hours in each participant's timezone.</td></tr>
+<tr><td>Deterministic slot generator first</td><td>Generate feasible slots in code, then let the model rank/explain only those slots.</td></tr>
+<tr><td>Question deduplication</td><td>Compare embeddings or normalized text against prior generated sets.</td></tr>
+<tr><td>Feedback contradiction flag</td><td>Detect when recommendation conflicts with ratings or written evidence.</td></tr>
+<tr><td>Protected-attribute filter</td><td>Block questions about age, family, religion, disability and other unlawful topics.</td></tr>
+</tbody></table></div>
+
+<h2 id="quiz">8 · Knowledge check</h2>
+<div class="quiz"><div class="q">Why does the service re-check proposed interview slots?</div><label class="opt">To increase token count</label><label class="opt" data-correct="true">Because collision rules are deterministic and must not depend on model reliability</label><label class="opt">Because the frontend cannot display dates</label><div class="explain">An LLM may rank options, but business invariants belong in normal code.</div></div>
+
+        <div class="complete-bar ats-complete-bar">
+  <div><strong>Finished this lesson?</strong><p>Mark it complete. Your ATS Lab progress stays in this browser.</p></div>
+  <button class="btn" type="button" data-ats-complete>Mark lesson complete</button>
+</div>
+        <div class="page-nav"><a href="03-recruitment-agents.html"><div class="dir">← Previous</div><div class="ttl">03 · Recruiting agents</div></a><a class="next" href="05-production-safety.html"><div class="dir">Next →</div><div class="ttl">05 · Production safety</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script src="../assets/sitenav.js"></script>
+<script src="../assets/enhance.js"></script>
+<script src="../assets/ats-lab.js"></script>
+</body>
+</html>
