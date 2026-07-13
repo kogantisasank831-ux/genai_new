@@ -136,12 +136,18 @@ img, svg { max-width: 100%; }
   background: var(--bg-subtle); border-bottom: 1px solid var(--border); z-index: 5;
 }
 .brand-mark {
-  width: 28px; height: 28px; border-radius: 7px; flex: none;
-  background: linear-gradient(135deg, var(--accent), #a68af5);
-  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px;
+  position: relative; overflow: hidden;
+  width: 30px; height: 30px; border-radius: 9px; flex: none;
+  background: linear-gradient(145deg, #24184e, var(--accent) 62%, #58a8ff);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #fff; line-height: .72;
+  box-shadow: 0 7px 20px rgba(82, 44, 209, .22), inset 0 1px 0 rgba(255,255,255,.42);
 }
+.brand-mark > span { position:relative; z-index:1; display:block; font-size:9px; font-weight:900; letter-spacing:-.04em; text-shadow:0 1px 5px rgba(29,16,75,.4); }
+.brand-mark > span + span { margin-top:2px; }
+.brand-mark::before { content:""; position:absolute; inset:0 0 48%; background:linear-gradient(180deg,rgba(255,255,255,.26),transparent); pointer-events:none; }
 .brand-text strong { display: block; font-size: 13.5px; letter-spacing: -0.01em; line-height: 1.2; }
-.brand-text span { font-size: 11px; color: var(--text-muted); }
+.brand-text span { display:block; margin-top:1px; font-size:11px; line-height:1.15; color:var(--text-secondary); font-weight:650; letter-spacing:.01em; }
 
 .search-wrap { padding: 10px 12px 4px; position: sticky; top: 55px; background: var(--bg-subtle); z-index: 4; }
 .search-box {
@@ -760,13 +766,15 @@ a { text-underline-offset: .18em; text-decoration-thickness: .08em; }
 }
 .brand-mark {
   position: relative;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #4f26cf, #7c56ff 72%, #9f89ff);
-  box-shadow: 0 10px 26px rgba(82, 44, 209, .28), inset 0 1px 0 rgba(255, 255, 255, .36);
-  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #24184e, #6f47f5 62%, #58a8ff);
+  box-shadow: 0 10px 28px rgba(82, 44, 209, .3), inset 0 1px 0 rgba(255, 255, 255, .42);
 }
+.brand-mark > span { font-size:11px; }
+.brand-mark > span + span { margin-top:3px; }
+.brand-mark::before { background:linear-gradient(180deg,rgba(255,255,255,.3),transparent); }
 .brand-mark::after {
   content: "";
   position: absolute;
@@ -774,8 +782,8 @@ a { text-underline-offset: .18em; text-decoration-thickness: .08em; }
   border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 9px;
 }
-.brand-text strong { font-size: 14px; letter-spacing: -.02em; }
-.brand-text span { font-size: 10.5px; letter-spacing: .01em; }
+.brand-text strong { font-size:15px; letter-spacing:-.025em; line-height:1.08; }
+.brand-text span { margin-top:2px; font-size:12px; color:var(--text-secondary); font-weight:700; letter-spacing:.005em; line-height:1.08; }
 
 .search-wrap {
   top: 68px;
@@ -1634,11 +1642,15 @@ body.focus-mode .site-footer { opacity: .46; }
   .sidebar {
     width: min(88vw, 318px);
     padding: 8px;
+    z-index: 100;
     transform: translateX(-105%);
     transition: transform .32s var(--ease-out);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
   .sidebar::after { left: 8px; top: 8px; bottom: 8px; width: calc(min(88vw, 318px) - 16px); }
   .app.nav-open .sidebar { transform: translateX(0); }
+  .backdrop { z-index: 90; }
   .topbar { top: 7px; width: calc(100% - 16px); margin: 7px 8px 0; border-radius: 16px; }
   .content-wrap { padding: 0 clamp(16px, 5vw, 28px); }
   .home-btn .home-lbl, .focus-btn .focus-lbl, .reader-btn .reader-lbl { display: none; }
@@ -1646,6 +1658,8 @@ body.focus-mode .site-footer { opacity: .46; }
   .hero { border-radius: 25px; }
   .hero h1 { max-width: 15ch; }
   .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.nav-drawer-open { overflow: hidden; touch-action: none; }
+  body.nav-drawer-open .sidebar { touch-action: pan-y; }
 }
 @media (max-width: 640px) {
   :root { --fs-h1: clamp(28px, 9vw, 38px); --fs-h2: clamp(21px, 6vw, 26px); --fs-hero: clamp(38px, 12vw, 53px); }

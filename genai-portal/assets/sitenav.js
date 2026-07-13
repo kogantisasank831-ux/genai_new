@@ -321,18 +321,36 @@
   function setupSidebarToggle() {
     var app = document.querySelector(".app");
     var menu = document.querySelector(".menu-btn");
+    var sidebar = document.querySelector(".sidebar");
+    var backdrop = document.querySelector(".backdrop");
     if (!app) return;
+
+    function setMobileDrawer(open, restoreFocus) {
+      open = Boolean(open && isMobile());
+      app.classList.toggle("nav-open", open);
+      document.body.classList.toggle("nav-drawer-open", open);
+      if (menu) menu.setAttribute("aria-expanded", open ? "true" : "false");
+      if (sidebar) {
+        var hidden = !open && isMobile();
+        sidebar.setAttribute("aria-hidden", hidden ? "true" : "false");
+        sidebar.inert = hidden;
+      }
+      if (!open && restoreFocus && menu) menu.focus();
+    }
 
     // Restore the saved desktop state (only affects desktop; mobile uses the drawer).
     try {
       if (localStorage.getItem(LS_SIDEBAR) === "collapsed") app.classList.add("sidebar-collapsed");
     } catch (e) {}
 
+    if (sidebar && !sidebar.id) sidebar.id = "site-navigation";
     if (menu) {
       menu.setAttribute("aria-label", "Toggle navigation");
+      menu.setAttribute("aria-controls", sidebar ? sidebar.id : "site-navigation");
+      menu.setAttribute("aria-expanded", "false");
       menu.addEventListener("click", function () {
         if (isMobile()) {
-          app.classList.toggle("nav-open");        // slide-in drawer
+          setMobileDrawer(!app.classList.contains("nav-open"));
         } else {
           var collapsed = app.classList.toggle("sidebar-collapsed");
           try { localStorage.setItem(LS_SIDEBAR, collapsed ? "collapsed" : "open"); } catch (e) {}
@@ -340,10 +358,19 @@
       });
     }
 
-    // If the user crosses the breakpoint, make sure the mobile drawer isn't left open.
-    window.addEventListener("resize", function () {
-      if (!isMobile()) app.classList.remove("nav-open");
+    if (backdrop) backdrop.addEventListener("click", function () { setMobileDrawer(false); });
+    if (sidebar) sidebar.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () { setMobileDrawer(false); });
     });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && app.classList.contains("nav-open")) setMobileDrawer(false, true);
+    });
+
+    // Keep drawer state and accessibility attributes correct across the breakpoint.
+    window.addEventListener("resize", function () {
+      setMobileDrawer(isMobile() && app.classList.contains("nav-open"));
+    });
+    setMobileDrawer(false);
   }
 
   /* ---------- Smooth page transitions ----------
