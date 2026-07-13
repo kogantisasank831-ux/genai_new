@@ -102,6 +102,39 @@
         { path: "genai-portal/ats-agent-lab/07-build-from-scratch.html", title: "Build from scratch", num: "07", kw: "python fastapi tutorial capstone build agent service code" }
       ]
     },
+
+
+    /* INTERVIEW_PREP_START */
+    {
+      id: "interviewprep", label: "GenAI Interview Prep", mark: "I", blurb: "India-focused question bank", home: "genai-portal/interview-prep/index.html",
+      pages: [
+        { path: "genai-portal/interview-prep/index.html", title: "Question bank overview", num: "✦", kw: "interview questions india genai preparation answers" },
+        { path: "genai-portal/interview-prep/01-llm-foundations-prompting.html", title: "Foundations & prompting", num: "01", kw: "llm transformer tokens context temperature hallucination prompt structured output function calling fine tuning" },
+        { path: "genai-portal/interview-prep/02-embeddings-rag.html", title: "Embeddings & RAG", num: "02", kw: "embeddings cosine vector database pgvector hnsw chunking hybrid search reranking retrieval evaluation" },
+        { path: "genai-portal/interview-prep/03-agents-mcp.html", title: "Agents, LangGraph & MCP", num: "03", kw: "agents workflows react tool calling langgraph mcp memory multi agent human in loop idempotency" },
+        { path: "genai-portal/interview-prep/04-evaluation-llmops.html", title: "Evaluation & LLMOps", num: "04", kw: "evaluation golden dataset llm judge tracing langfuse prompt version drift release gate monitoring" },
+        { path: "genai-portal/interview-prep/05-production-performance.html", title: "Production, latency & cost", num: "05", kw: "model selection latency streaming caching concurrency batching tokens cost backpressure deployment slo" },
+        { path: "genai-portal/interview-prep/06-security-responsible-ai.html", title: "Security & responsible AI", num: "06", kw: "prompt injection rbac rag sql injection pii tools secrets responsible ai bias guardrails" },
+        { path: "genai-portal/interview-prep/07-python-backend-cloud.html", title: "Python, backend & cloud", num: "07", kw: "python async fastapi pydantic celery temporal idempotency multi tenancy docker kubernetes rate limit testing" },
+        { path: "genai-portal/interview-prep/08-project-behavioral.html", title: "Project & behavioural", num: "08", kw: "project architecture stack failure optimization tradeoff stakeholder ownership day to day current 90 days" },
+      ]
+    },
+    {
+      id: "scenariopractice", label: "Scenario Design Studio", mark: "S", blurb: "Architecture interview practice", home: "genai-portal/scenario-practice/index.html",
+      pages: [
+        { path: "genai-portal/scenario-practice/index.html", title: "Scenario studio overview", num: "✦", kw: "system design scenario practice genai architecture" },
+        { path: "genai-portal/scenario-practice/framework.html", title: "Answer framework", num: "00", kw: "clarify design scale secure measure framework" },
+        { path: "genai-portal/scenario-practice/01-enterprise-knowledge-assistant.html", title: "Enterprise knowledge assistant", num: "01", kw: "enterprise rag chatbot permissions citations hybrid retrieval latency" },
+        { path: "genai-portal/scenario-practice/02-customer-support-agent.html", title: "Customer support agent", num: "02", kw: "customer support agent tools workflow human handoff pii latency load" },
+        { path: "genai-portal/scenario-practice/03-secure-text-to-sql.html", title: "Secure text-to-SQL", num: "03", kw: "text to sql analytics semantic layer read only parameterized ast injection rbac" },
+        { path: "genai-portal/scenario-practice/04-ats-recruiter-copilot.html", title: "ATS recruiter copilot", num: "04", kw: "ats recruiter resume screening matching interview scheduling bias human review audit" },
+        { path: "genai-portal/scenario-practice/05-multilingual-voice-assistant.html", title: "Multilingual voice assistant", num: "05", kw: "voice assistant speech streaming multilingual latency barge in agent tools" },
+        { path: "genai-portal/scenario-practice/06-invoice-document-workflow.html", title: "Invoice document workflow", num: "06", kw: "invoice document ai ocr extraction validation workflow human review queue" },
+        { path: "genai-portal/scenario-practice/07-high-scale-shopping-assistant.html", title: "High-scale shopping assistant", num: "07", kw: "shopping assistant recommendations catalog search agent high scale personalization latency cache" },
+        { path: "genai-portal/scenario-practice/08-regulated-financial-research.html", title: "Financial research copilot", num: "08", kw: "financial research copilot compliance citations audit human approval market data secure rag" },
+      ]
+    },
+    /* INTERVIEW_PREP_END */
     {
       id: "deepdives",
       label: "Deep Dives",

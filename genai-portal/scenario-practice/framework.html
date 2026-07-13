@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f5f8">
+<title>The C-D-S-S-M Answer Framework — GenAI Learning Hub</title>
+<meta name="description" content="A reusable framework for answering GenAI system design interview scenarios.">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-page="scenario-framework" data-prep-section="scenario">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="brand-mark">G</div><div class="brand-text"><strong>GenAI Learning Hub</strong><span>Scenario Design Studio</span></div></a></div>
+    <div class="search-wrap"><div class="search-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" data-search placeholder="Search everything…  ( / )"></div><div class="search-results"></div></div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Scenario Design Studio / Answer framework</div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content prep-content">
+        <div class="eyebrow"><span class="dot"></span> Framework · Clarify, Design, Scale, Secure, Measure</div>
+        <h1>The C-D-S-S-M Answer Framework</h1>
+        <p class="lead">A calm, repeatable way to turn any GenAI scenario into a strong architecture answer.</p>
+        
+<div class="meta-row"><span class="pill purple">C · D · S · S · M</span><span class="pill">Reusable in every interview</span><span class="pill blue">10–20 minute answer</span></div>
+<div class="scenario-framework" data-reveal>
+<div><b>C</b><h3>Clarify</h3><p>Users, volume, data sensitivity, freshness, actions, success metric.</p></div>
+<div><b>D</b><h3>Design</h3><p>Data flow, model/RAG/agent boundary, APIs, storage and fallbacks.</p></div>
+<div><b>S</b><h3>Scale</h3><p>Latency budget, caching, queues, concurrency, rate limits and cost.</p></div>
+<div><b>S</b><h3>Secure</h3><p>Identity, tenant ACLs, prompt injection, tool policy, PII and audit.</p></div>
+<div><b>M</b><h3>Measure</h3><p>Offline evals, online SLOs, traces, human feedback and rollback.</p></div>
+</div>
+<h2 id="clarify">1 · Clarify the problem</h2><p>Ask only the questions that change the architecture. A good opening is: “I’ll confirm users, scale, data sensitivity, actions and success criteria, then propose the design.”</p>
+<div class="scenario-question-grid"><div class="card"><h4>Users and jobs</h4><p>Who uses it? What decision or task becomes faster? Is the output advisory or allowed to trigger actions?</p></div><div class="card"><h4>Data and freshness</h4><p>Which sources, formats and permissions? How quickly must updates appear? Is data tenant-specific or regulated?</p></div><div class="card"><h4>Traffic and SLO</h4><p>Peak QPS, concurrent sessions, response-time target, availability, cost ceiling and acceptable degradation.</p></div><div class="card"><h4>Quality</h4><p>What does “correct” mean? Which errors are unacceptable? Who reviews low-confidence or consequential outputs?</p></div></div>
+<h2 id="design">2 · Design from deterministic outside to probabilistic inside</h2>
+<div class="ats-equation"><span>trusted application code</span><b>＋</b><span>bounded model capability</span><b>→</b><span>validated product behavior</span></div>
+<ul class="ats-checklist"><li>Keep identity, authorization, money, workflow state and database writes in normal code.</li><li>Use RAG when answers need private or fresh evidence; use tools when the system must act or fetch live structured data.</li><li>Use an agent only when the next step depends on observations. Prefer a fixed workflow when the sequence is known.</li><li>Require schemas, timeouts, budgets, stop conditions and a fallback for every model-dependent step.</li></ul>
+<h2 id="scale">3 · Build a latency budget</h2><div class="table-wrap"><table><thead><tr><th>Stage</th><th>Questions to answer</th><th>Common optimization</th></tr></thead><tbody><tr><td>Gateway</td><td>Authentication, rate limit, payload size</td><td>Edge cache, request limits</td></tr><tr><td>Retrieval/tools</td><td>How many calls? Can they run in parallel?</td><td>Hybrid indexes, parallel I/O, result cache</td></tr><tr><td>Model</td><td>Prompt tokens, output tokens, model tier</td><td>Routing, smaller model, streaming, prefix cache</td></tr><tr><td>Post-processing</td><td>Validation, citations, policy checks</td><td>Deterministic fast checks, async audit</td></tr></tbody></table></div>
+<h2 id="secure">4 · Treat model input and output as untrusted</h2><div class="diagram prep-diagram" data-reveal><svg viewBox="0 0 920 310" role="img" aria-label="Animated defense in depth layers around an AI application">
+<g class="prep-shield s1"><rect x="48" y="45" width="824" height="220" rx="36"/><text x="90" y="80">Identity · tenant boundary · rate limits</text></g>
+<g class="prep-shield s2"><rect x="142" y="82" width="636" height="150" rx="30"/><text x="182" y="115">Input classification · retrieval ACLs · tool allowlist</text></g>
+<g class="prep-shield s3"><rect x="260" y="119" width="400" height="82" rx="24"/><text x="460" y="151">Model + structured output</text><text class="sub" x="460" y="174">untrusted until validated</text></g>
+<path class="prep-scan" d="M105 245H815"/>
+</svg><div class="diagram-caption">No prompt can be the security boundary. Identity, data authorization, tool policy and output validation must surround the model.</div></div>
+<ul class="ats-checklist"><li>Authorize retrieval before sending text to the model; never retrieve broadly and ask the model to hide unauthorized data.</li><li>Label retrieved text as data, not instructions. Detect suspicious patterns, but rely on least-privilege tools and server-side policy.</li><li>For SQL, generate or select from a restricted query plan, parameterize values, use a read-only account, allowlisted views, row limits and timeouts.</li><li>Redact or tokenize PII where possible; encrypt data, maintain retention rules and log every consequential action.</li></ul>
+<h2 id="measure">5 · Finish with measurement</h2><p>Name both quality and operational metrics. Explain how production failures become new regression cases and how you roll back model, prompt, retriever or tool versions independently.</p>
+<div class="scenario-metrics"><div class="scenario-metric"><strong>Quality</strong><span>task success, groundedness, precision/recall</span></div><div class="scenario-metric"><strong>Safety</strong><span>policy violations, data leakage, unsafe actions</span></div><div class="scenario-metric"><strong>Operations</strong><span>p50/p95 latency, error rate, availability</span></div><div class="scenario-metric"><strong>Economics</strong><span>tokens, tool calls and cost per successful task</span></div></div>
+<div class="callout note"><div class="c-ico">🗣️</div><div class="c-body"><div class="c-title">One-minute answer skeleton</div><p>“I’ll clarify users, scale, sensitive data and success. I’ll keep authorization and writes deterministic, use RAG for evidence, and add a bounded agent only where routing is dynamic. The request path is … My latency budget is … Security is enforced by … I’ll evaluate with … and degrade safely by …”</p></div></div>
+
+        <div class="page-nav"><a href="index.html"><div class="dir">← Previous</div><div class="ttl">Scenario Design Studio</div></a><a class="next" href="01-enterprise-knowledge-assistant.html"><div class="dir">Next →</div><div class="ttl">Enterprise Knowledge Assistant</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script src="../assets/sitenav.js"></script>
+<script src="../assets/enhance.js"></script>
+<script src="../assets/interview-prep.js"></script>
+
+</body>
+</html>
