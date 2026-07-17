@@ -29,12 +29,12 @@
 <p class="lead">A focused preparation system for your actual starting point: nine years in data and consulting, useful production exposure, but low current coding fluency and no formal DSA or system-design foundation. The goal is independent engineering ability—not memorized answers.</p>
 <div class="gp-warning"><strong>Operating principle:</strong> apply when the readiness gates turn green, not because a calendar date arrived. Role level is flexible; interview standards are not.</div>
 </div>
-<div aria-label="Readiness score" class="gp-score"><span data-readiness-score="">0</span><small>/ 100 readiness</small><div class="gp-score-ring"><i data-score-ring=""></i></div></div>
+
 </section>
 <section aria-label="Preparation settings" class="gp-controls">
 <div><label for="track">Primary career track</label><select data-track="" id="track"><option value="python">Python / Backend SDE</option><option value="ml">ML &amp; Data Systems SDE</option><option value="dual">Dual track</option></select></div>
 <div><label for="hours">Weekly study capacity</label><select data-hours="" id="hours"><option value="8">8 hours</option><option selected="" value="10">10 hours</option><option value="12">12 hours</option><option value="15">15 hours</option></select></div>
-<button class="btn" data-reset-progress="">Reset progress</button>
+
 </section>
 <section class="gp-track-panel" data-track-panel="python">
 <div class="gp-track-icon">Py</div><div><h2>Python / Backend SDE track</h2><p>For general Google software-development roles—not dependent on AI, data science or ML. Focus: Python fluency, backend services, databases, testing, distributed systems and interview problem-solving.</p></div>
@@ -53,51 +53,48 @@
 <h2 id="roadmap">Focused preparation roadmap</h2>
 <p>Complete phases in order. Later topics unlock only when the previous readiness gate is met.</p>
 <div class="gp-phases" data-phase-list="">
-<article class="gp-phase" data-phase="1"><header><span>01</span><div><h3>Python fluency reset</h3><p>Write, test and debug ordinary programs without AI.</p></div><b data-phase-pct="">0%</b></header><div class="gp-task-list">
-<label><input data-task="py-core" type="checkbox"/> Core syntax, functions, collections and comprehensions</label>
-<label><input data-task="py-oop" type="checkbox"/> Classes, dataclasses, exceptions and modules</label>
-<label><input data-task="py-iter" type="checkbox"/> Iterators, generators and context managers</label>
-<label><input data-task="py-test" type="checkbox"/> pytest, mocking, logging and debugging</label>
-<label><input data-task="py-cli" type="checkbox"/> Build a CLI data-processing tool from scratch</label>
-<label><input data-task="py-api" type="checkbox"/> Build and test a FastAPI CRUD service</label>
+<article class="gp-phase" data-phase="1"><header><span>01</span><div><h3>Python fluency reset</h3><p>Write, test and debug ordinary programs without AI.</p></div></header><div class="gp-task-list">
+<div class="gp-static-task"> Core syntax, functions, collections and comprehensions</div>
+<div class="gp-static-task"> Classes, dataclasses, exceptions and modules</div>
+<div class="gp-static-task"> Iterators, generators and context managers</div>
+<div class="gp-static-task"> pytest, mocking, logging and debugging</div>
+<div class="gp-static-task"> Build a CLI data-processing tool from scratch</div>
+<div class="gp-static-task"> Build and test a FastAPI CRUD service</div>
 </div><div class="gp-gate"><strong>Gate:</strong> complete a 90-minute coding session with AI disabled; write a small API plus tests and explain every design choice.</div></article>
-<article class="gp-phase" data-phase="2"><header><span>02</span><div><h3>DSA foundations</h3><p>Learn patterns, not a pile of remembered solutions.</p></div><b data-phase-pct="">0%</b></header><div class="gp-task-list">
-<label><input data-task="dsa-arrays" type="checkbox"/> Arrays, strings, hash maps and sets</label>
-<label><input data-task="dsa-patterns" type="checkbox"/> Two pointers, sliding window, prefix sums and binary search</label>
-<label><input data-task="dsa-linear" type="checkbox"/> Stacks, queues and linked lists</label>
-<label><input data-task="dsa-trees" type="checkbox"/> Trees, BST, heaps, BFS and DFS</label>
-<label><input data-task="dsa-graphs" type="checkbox"/> Graphs, topological sort and union-find</label>
-<label><input data-task="dsa-advanced" type="checkbox"/> Backtracking, greedy and dynamic programming</label>
-<label><input data-task="dsa-100" type="checkbox"/> Solve and review 100 pattern-balanced problems</label>
+<article class="gp-phase" data-phase="2"><header><span>02</span><div><h3>DSA foundations</h3><p>Learn patterns, not a pile of remembered solutions.</p></div></header><div class="gp-task-list">
+<div class="gp-static-task"> Arrays, strings, hash maps and sets</div>
+<div class="gp-static-task"> Two pointers, sliding window, prefix sums and binary search</div>
+<div class="gp-static-task"> Stacks, queues and linked lists</div>
+<div class="gp-static-task"> Trees, BST, heaps, BFS and DFS</div>
+<div class="gp-static-task"> Graphs, topological sort and union-find</div>
+<div class="gp-static-task"> Backtracking, greedy and dynamic programming</div>
+<div class="gp-static-task"> Solve and review 100 pattern-balanced problems</div>
 </div><div class="gp-gate"><strong>Gate:</strong> solve an unseen medium problem in 35 minutes, communicate clearly, test edge cases and state time/space complexity.</div></article>
-<article class="gp-phase" data-phase="3"><header><span>03</span><div><h3>Production Python engineering</h3><p>Move from scripts to maintainable services.</p></div><b data-phase-pct="">0%</b></header><div class="gp-task-list">
-<label><input data-task="be-http" type="checkbox"/> HTTP, REST, validation, auth, pagination and idempotency</label>
-<label><input data-task="be-db" type="checkbox"/> PostgreSQL schemas, indexes, transactions and query plans</label>
-<label><input data-task="be-concurrency" type="checkbox"/> Processes, threads, asyncio and concurrency trade-offs</label>
-<label><input data-task="be-quality" type="checkbox"/> Type checking, linting, unit/integration tests and CI</label>
-<label><input data-task="be-runtime" type="checkbox"/> Linux, networking, Docker, profiling and observability</label>
-<label><input data-task="be-project" type="checkbox"/> Ship one production-grade backend project</label>
+<article class="gp-phase" data-phase="3"><header><span>03</span><div><h3>Production Python engineering</h3><p>Move from scripts to maintainable services.</p></div></header><div class="gp-task-list">
+<div class="gp-static-task"> HTTP, REST, validation, auth, pagination and idempotency</div>
+<div class="gp-static-task"> PostgreSQL schemas, indexes, transactions and query plans</div>
+<div class="gp-static-task"> Processes, threads, asyncio and concurrency trade-offs</div>
+<div class="gp-static-task"> Type checking, linting, unit/integration tests and CI</div>
+<div class="gp-static-task"> Linux, networking, Docker, profiling and observability</div>
+<div class="gp-static-task"> Ship one production-grade backend project</div>
 </div><div class="gp-gate"><strong>Gate:</strong> defend architecture, schema, failure handling, test strategy, performance and deployment of your own service.</div></article>
-<article class="gp-phase" data-phase="4"><header><span>04</span><div><h3>System design</h3><p>Build trade-off reasoning from components upward.</p></div><b data-phase-pct="">0%</b></header><div class="gp-task-list">
-<label><input data-task="sd-basics" type="checkbox"/> Latency, throughput, capacity estimation and bottlenecks</label>
-<label><input data-task="sd-storage" type="checkbox"/> SQL/NoSQL, replication, partitioning and consistency</label>
-<label><input data-task="sd-components" type="checkbox"/> Load balancers, caches, queues, streams and workers</label>
-<label><input data-task="sd-reliability" type="checkbox"/> Retries, idempotency, fault tolerance and observability</label>
-<label><input data-task="sd-designs" type="checkbox"/> Complete 12 timed designs from small to large</label>
-<label><input data-task="sd-domain" type="checkbox"/> Design a Python job platform and a data/ML platform</label>
+<article class="gp-phase" data-phase="4"><header><span>04</span><div><h3>System design</h3><p>Build trade-off reasoning from components upward.</p></div></header><div class="gp-task-list">
+<div class="gp-static-task"> Latency, throughput, capacity estimation and bottlenecks</div>
+<div class="gp-static-task"> SQL/NoSQL, replication, partitioning and consistency</div>
+<div class="gp-static-task"> Load balancers, caches, queues, streams and workers</div>
+<div class="gp-static-task"> Retries, idempotency, fault tolerance and observability</div>
+<div class="gp-static-task"> Complete 12 timed designs from small to large</div>
+<div class="gp-static-task"> Design a Python job platform and a data/ML platform</div>
 </div><div class="gp-gate"><strong>Gate:</strong> lead a 45-minute design conversation: clarify, estimate, propose, find bottlenecks, evolve and discuss trade-offs.</div></article>
-<article class="gp-phase" data-phase="5"><header><span>05</span><div><h3>Google interview execution</h3><p>Convert knowledge into consistent interview performance.</p></div><b data-phase-pct="">0%</b></header><div class="gp-task-list">
-<label><input data-task="int-resume" type="checkbox"/> Rewrite and defend every resume bullet</label>
-<label><input data-task="int-behaviour" type="checkbox"/> Prepare 12 STAR stories with evidence and reflection</label>
-<label><input data-task="int-management" type="checkbox"/> Leadership, conflict, ambiguity and prioritization scenarios</label>
-<label><input data-task="int-coding" type="checkbox"/> Complete 20 timed coding mocks</label>
-<label><input data-task="int-design" type="checkbox"/> Complete 10 system-design mocks</label>
-<label><input data-task="int-full" type="checkbox"/> Pass three full mock loops without a major weak round</label>
+<article class="gp-phase" data-phase="5"><header><span>05</span><div><h3>Google interview execution</h3><p>Convert knowledge into consistent interview performance.</p></div></header><div class="gp-task-list">
+<div class="gp-static-task"> Rewrite and defend every resume bullet</div>
+<div class="gp-static-task"> Prepare 12 STAR stories with evidence and reflection</div>
+<div class="gp-static-task"> Leadership, conflict, ambiguity and prioritization scenarios</div>
+<div class="gp-static-task"> Complete 20 timed coding mocks</div>
+<div class="gp-static-task"> Complete 10 system-design mocks</div>
+<div class="gp-static-task"> Pass three full mock loops without a major weak round</div>
 </div><div class="gp-gate"><strong>Gate:</strong> no repeated critical feedback across three consecutive mock loops; explanations remain structured under pressure.</div></article>
 </div>
-
-
-
 <h2 id="focused-labs">Focused interview learning labs</h2><p>Use these in Phase 3 and alongside mock interviews. Each lab is compact, implementation-oriented, and designed for answers you can explain aloud without AI assistance.</p><div class="grid grid-3">
 <a class="card" href="../interview-labs/python-sync-async-interview.html" style="text-decoration:none;color:inherit"><h3>Sync vs Async Python</h3><p>Event loop, tasks, threads, processes, GIL, cancellation and backpressure.</p></a>
 <a class="card" href="../interview-labs/fastapi-interview.html" style="text-decoration:none;color:inherit"><h3>FastAPI</h3><p>ASGI, request lifecycle, Pydantic, dependencies, testing, security and deployment.</p></a>
@@ -125,16 +122,16 @@
 </div>
 <h2 id="readiness">Application readiness gates</h2>
 <div class="gp-gates">
-<label><input data-task="gate-ai-off" type="checkbox"/> I can code for 90 minutes with AI disabled.</label>
-<label><input data-task="gate-medium" type="checkbox"/> I consistently solve unseen medium DSA problems.</label>
-<label><input data-task="gate-project" type="checkbox"/> I can defend one production-grade Python project deeply.</label>
-<label><input data-task="gate-design" type="checkbox"/> I can lead a 45-minute system-design discussion.</label>
-<label><input data-task="gate-stories" type="checkbox"/> I have 12 concise, evidence-backed behavioural stories.</label>
-<label><input data-task="gate-mocks" type="checkbox"/> I passed three consecutive full mock loops.</label>
+<div class="gp-static-task"> I can code for 90 minutes with AI disabled.</div>
+<div class="gp-static-task"> I consistently solve unseen medium DSA problems.</div>
+<div class="gp-static-task"> I can defend one production-grade Python project deeply.</div>
+<div class="gp-static-task"> I can lead a 45-minute system-design discussion.</div>
+<div class="gp-static-task"> I have 12 concise, evidence-backed behavioural stories.</div>
+<div class="gp-static-task"> I passed three consecutive full mock loops.</div>
 </div>
-<div class="gp-verdict" data-verdict="">Foundation stage: do not optimize for applications yet. Optimize for independent coding.</div>
+
 <h2 id="rules">Rules that keep preparation honest</h2>
-<div class="callout key"><div class="c-ico">✓</div><div class="c-body"><div class="c-title">AI may coach; it may not perform the repetition for you.</div><p>Attempt first, request hints second, reimplement from memory, and regularly practise in an AI-free editor. Never mark a topic complete merely because an explanation felt familiar.</p></div></div>
+<div class="callout key"><div class="c-ico">✓</div><div class="c-body"><div class="c-title">AI may coach; it may not perform the repetition for you.</div><p>Attempt first, request hints second, reimplement from memory, and regularly practise in an AI-free editor. Do not treat familiarity as mastery; reproduce the work independently.</p></div></div>
 <div class="page-nav"><a class="prev" href="../index.html"><div class="dir">← Hub</div><div class="ttl">GenAI Learning Hub</div></a><span></span></div>
 </main>
 <div class="toc-rail"><nav class="toc"></nav></div>

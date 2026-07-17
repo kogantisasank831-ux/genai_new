@@ -22,6 +22,17 @@
   /* ---------- Central registry (paths are relative to the SITE ROOT) ---------- */
   var GROUPS = [
     {
+      id: "studyplan",
+      label: "Global Study Plan",
+      mark: "P",
+      blurb: "Hours, order and weekly cadence",
+      home: "genai-portal/study-plan.html",
+      direct: true,
+      pages: [
+        { path: "genai-portal/study-plan.html", title: "Global Study Plan", num: "P", kw: "study plan roadmap hours schedule time weekly daily ai engineer interview route" }
+      ]
+    },
+    {
       id: "mastery",
       label: "GenAI Mastery",
       mark: "G",
@@ -149,6 +160,7 @@
       id: "interviewprep", label: "GenAI Interview Prep", mark: "I", blurb: "India-focused question bank", home: "genai-portal/interview-prep/index.html",
       pages: [
         { path: "genai-portal/interview-prep/index.html", title: "Question bank overview", num: "✦", kw: "interview questions india genai preparation answers" },
+        { path: "genai-portal/interview-prep/00-neural-networks.html", title: "Neural Networks", num: "00", kw: "neural network neuron weights bias activation forward pass loss backpropagation optimizer gradients pytorch ai engineer interview" },
         { path: "genai-portal/interview-prep/01-llm-foundations-prompting.html", title: "Foundations & prompting", num: "01", kw: "llm transformer tokens context temperature hallucination prompt structured output function calling fine tuning" },
         { path: "genai-portal/interview-prep/02-embeddings-rag.html", title: "Embeddings & RAG", num: "02", kw: "embeddings cosine vector database pgvector hnsw chunking hybrid search reranking retrieval evaluation" },
         { path: "genai-portal/interview-prep/03-agents-mcp.html", title: "Agents, LangGraph & MCP", num: "03", kw: "agents workflows react tool calling langgraph mcp memory multi agent human in loop idempotency" },
@@ -247,6 +259,14 @@
     var html = "";
     GROUPS.forEach(function (g) {
       var open = (g === currentGroup);
+      if (g.direct) {
+        html += '<div class="navgroup navgroup-direct' + (open ? " open" : "") + '" data-group="' + g.id + '">' +
+                '<a class="navgroup-head" href="' + href(g.pages[0].path) + '">' +
+                '<span class="ng-mk">' + g.mark + '</span>' +
+                '<span class="ng-label">' + g.label + '</span>' +
+                '<span class="ng-direct-arrow" aria-hidden="true">→</span></a></div>';
+        return;
+      }
       html += '<div class="navgroup' + (open ? " open" : "") + '" data-group="' + g.id + '">';
       html += '<button class="navgroup-head" aria-expanded="' + (open ? "true" : "false") + '">' +
                 '<span class="ng-mk">' + g.mark + '</span>' +
@@ -268,7 +288,7 @@
     nav.classList.add("sitenav");
 
     // collapse/expand
-    nav.querySelectorAll(".navgroup-head").forEach(function (btn) {
+    nav.querySelectorAll(".navgroup:not(.navgroup-direct) > .navgroup-head").forEach(function (btn) {
       btn.addEventListener("click", function () {
         var grp = btn.closest(".navgroup");
         var nowOpen = grp.classList.toggle("open");

@@ -1,77 +1,76 @@
-<!doctype html>
-<html lang="en" data-theme="light">
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f4f5f8">
-<title>Optimization, Evaluation & Operations — ATS Agent Build Lab</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f4f5f8" name="theme-color"/>
+<title>Optimization, Evaluation &amp; Operations — ATS Agent Build Lab</title>
 <!-- Interview Preparation brand metadata -->
-<link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="../../assets/brand/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="shortcut icon" href="../../assets/brand/favicon.ico">
-<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" sizes="180x180">
-<link rel="manifest" href="../../assets/brand/site.webmanifest">
-<link rel="mask-icon" href="../../assets/brand/safari-pinned-tab.svg" color="#6f47f5">
-<link rel="image_src" href="../../assets/brand/social-card.png">
-<meta name="application-name" content="Interview Preparation">
-<meta name="apple-mobile-web-app-title" content="Interview Prep">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileColor" content="#5b35e8">
-<meta name="msapplication-config" content="../../assets/brand/browserconfig.xml">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Interview Preparation">
-<meta property="og:title" content="Optimization, Evaluation &amp; Operations — ATS Agent Build Lab">
-<meta property="og:description" content="Optimize ATS agents for token cost, latency, caching and reliability, then evaluate quality with agent-specific metrics.">
-<meta property="og:image" content="../../assets/brand/social-card.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Interview Preparation glass-style logo">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Optimization, Evaluation &amp; Operations — ATS Agent Build Lab">
-<meta name="twitter:description" content="Optimize ATS agents for token cost, latency, caching and reliability, then evaluate quality with agent-specific metrics.">
-<meta name="twitter:image" content="../../assets/brand/social-card.png">
+<link href="../../assets/brand/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../../assets/brand/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="../../assets/brand/favicon.ico" rel="shortcut icon"/>
+<link href="../../assets/brand/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="../../assets/brand/site.webmanifest" rel="manifest"/>
+<link color="#6f47f5" href="../../assets/brand/safari-pinned-tab.svg" rel="mask-icon"/>
+<link href="../../assets/brand/social-card.png" rel="image_src"/>
+<meta content="Interview Preparation" name="application-name"/>
+<meta content="Interview Prep" name="apple-mobile-web-app-title"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="#5b35e8" name="msapplication-TileColor"/>
+<meta content="../../assets/brand/browserconfig.xml" name="msapplication-config"/>
+<meta content="website" property="og:type"/>
+<meta content="Interview Preparation" property="og:site_name"/>
+<meta content="Optimization, Evaluation &amp; Operations — ATS Agent Build Lab" property="og:title"/>
+<meta content="Optimize ATS agents for token cost, latency, caching and reliability, then evaluate quality with agent-specific metrics." property="og:description"/>
+<meta content="../../assets/brand/social-card.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Interview Preparation glass-style logo" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Optimization, Evaluation &amp; Operations — ATS Agent Build Lab" name="twitter:title"/>
+<meta content="Optimize ATS agents for token cost, latency, caching and reliability, then evaluate quality with agent-specific metrics." name="twitter:description"/>
+<meta content="../../assets/brand/social-card.png" name="twitter:image"/>
 <!-- /Interview Preparation brand metadata -->
-<meta name="description" content="Optimize ATS agents for token cost, latency, caching and reliability, then evaluate quality with agent-specific metrics.">
-<link rel="stylesheet" href="../assets/styles.css">
+<meta content="Optimize ATS agents for token cost, latency, caching and reliability, then evaluate quality with agent-specific metrics." name="description"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
 </head>
-<body data-page="ats-06" data-ats-lesson="06">
+<body data-ats-lesson="06" data-page="ats-06">
 <div class="app">
-  <aside class="sidebar">
-    <div class="brand"><a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><span class="brand-mark" aria-hidden="true"><span>I</span><span>P</span></span><div class="brand-text"><strong>Interview</strong><span>Preparation</span></div></a></div>
-    <div class="search-wrap"><div class="search-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" data-search placeholder="Search everything…  ( / )"></div><div class="search-results"></div></div>
-    <nav class="nav"></nav>
-  </aside>
-  <div class="backdrop"></div>
-  <div class="main">
-    <header class="topbar">
-      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
-      <div class="crumbs">ATS Agent Build Lab / <b>Optimization, Evaluation & Operations</b></div>
-      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
-    </header>
-    <div class="content-wrap">
-      <main class="content ats-content">
-        <div class="eyebrow"><span class="dot"></span> Lesson 06 · Make quality measurable</div>
-        <h1>Optimization, Evaluation & Operations</h1>
-        <p class="lead">Move from “the demo looked good” to a repeatable engineering loop for quality, cost, latency and safety.</p>
-        <div class="meta-row"><span class="pill blue">⏱ 45 min</span><span class="pill">Advanced · LLMOps</span><span class="pill purple">Based on the uploaded ATS app</span></div>
-        
+<aside class="sidebar">
+<div class="brand"><a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><span aria-hidden="true" class="brand-mark"><span>I</span><span>P</span></span><div class="brand-text"><strong>Interview</strong><span>Preparation</span></div></a></div>
+<div class="search-wrap"><div class="search-box"><svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg><input data-search="" placeholder="Search everything…  ( / )" type="text"/></div><div class="search-results"></div></div>
+<nav class="nav"></nav>
+</aside>
+<div class="backdrop"></div>
+<div class="main">
+<header class="topbar">
+<button aria-label="Menu" class="icon-btn menu-btn"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M3 12h18M3 6h18M3 18h18"></path></svg></button>
+<div class="crumbs">ATS Agent Build Lab / <b>Optimization, Evaluation &amp; Operations</b></div>
+<button aria-label="Toggle theme" class="icon-btn" data-theme-toggle=""></button>
+</header>
+<div class="content-wrap">
+<main class="content ats-content">
+<div class="eyebrow"><span class="dot"></span> Lesson 06 · Make quality measurable</div>
+<h1>Optimization, Evaluation &amp; Operations</h1>
+<p class="lead">Move from “the demo looked good” to a repeatable engineering loop for quality, cost, latency and safety.</p>
+<div class="meta-row"><span class="pill blue">⏱ Study + evaluation work · 5–8 h</span><span class="pill">Advanced · LLMOps</span><span class="pill purple">Based on the uploaded ATS app</span></div>
 <h2 id="mindset">1 · Optimize the whole system, not only the prompt</h2>
 <p>Production optimization has four goals: <strong>quality, latency, cost and reliability</strong>. A shorter prompt that loses essential evidence is not an optimization. A larger model that doubles quality for a rare task may be worthwhile.</p>
-<div class="diagram ats-diagram" data-reveal><svg viewBox="0 0 900 330" role="img" aria-label="Token budget and evaluation feedback loop">
-<defs><marker id="optArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
-<path d="M42 50 H390 L330 118 H102 Z" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="flow-label" x="216" y="83" text-anchor="middle">Raw CV + full job context</text>
-<path d="M102 122 H330 L292 184 H140 Z" fill="var(--blue-soft)" stroke="var(--blue)"/><text class="flow-label" x="216" y="157" text-anchor="middle">Relevant fields + trims</text>
-<path d="M140 188 H292 L260 244 H172 Z" fill="var(--green-soft)" stroke="var(--green)"/><text class="flow-label" x="216" y="221" text-anchor="middle">Focused prompt</text>
-<rect class="flow-node-accent" x="176" y="260" width="80" height="46" rx="12"/><text class="flow-label" x="216" y="288" text-anchor="middle">Call</text>
-<rect class="flow-node" x="500" y="46" width="150" height="58" rx="14"/><text class="flow-label" x="575" y="70" text-anchor="middle">Golden cases</text><text class="flow-sub" x="575" y="88" text-anchor="middle">human labels</text>
-<rect class="flow-node" x="708" y="46" width="150" height="58" rx="14"/><text class="flow-label" x="783" y="70" text-anchor="middle">Run agents</text><text class="flow-sub" x="783" y="88" text-anchor="middle">repeat N times</text>
-<rect class="flow-node" x="708" y="218" width="150" height="58" rx="14"/><text class="flow-label" x="783" y="242" text-anchor="middle">Metrics</text><text class="flow-sub" x="783" y="260" text-anchor="middle">quality · cost · latency</text>
-<rect class="flow-node-accent" x="500" y="218" width="150" height="58" rx="14"/><text class="flow-label" x="575" y="242" text-anchor="middle">Improve</text><text class="flow-sub" x="575" y="260" text-anchor="middle">prompt · policy · model</text>
-<path class="flow-arrow" d="M650,75 L706,75" style="stroke:var(--accent);marker-end:url(#optArrow)"/><path class="flow-arrow" d="M783,104 L783,216" style="stroke:var(--accent);marker-end:url(#optArrow)"/><path class="flow-arrow" d="M708,247 L652,247" style="stroke:var(--accent);marker-end:url(#optArrow)"/><path class="flow-arrow flow-dash" d="M575,216 L575,106" style="stroke:var(--accent);marker-end:url(#optArrow)"/>
+<div class="diagram ats-diagram" data-reveal=""><svg aria-label="Token budget and evaluation feedback loop" role="img" viewbox="0 0 900 330">
+<defs><marker id="optArrow" markerheight="10" markerwidth="10" orient="auto" refx="8" refy="3"><path d="M0,0 L8,3 L0,6 Z" fill="var(--accent)"></path></marker></defs>
+<path d="M42 50 H390 L330 118 H102 Z" fill="var(--accent-soft)" stroke="var(--accent)"></path><text class="flow-label" text-anchor="middle" x="216" y="83">Raw CV + full job context</text>
+<path d="M102 122 H330 L292 184 H140 Z" fill="var(--blue-soft)" stroke="var(--blue)"></path><text class="flow-label" text-anchor="middle" x="216" y="157">Relevant fields + trims</text>
+<path d="M140 188 H292 L260 244 H172 Z" fill="var(--green-soft)" stroke="var(--green)"></path><text class="flow-label" text-anchor="middle" x="216" y="221">Focused prompt</text>
+<rect class="flow-node-accent" height="46" rx="12" width="80" x="176" y="260"></rect><text class="flow-label" text-anchor="middle" x="216" y="288">Call</text>
+<rect class="flow-node" height="58" rx="14" width="150" x="500" y="46"></rect><text class="flow-label" text-anchor="middle" x="575" y="70">Golden cases</text><text class="flow-sub" text-anchor="middle" x="575" y="88">human labels</text>
+<rect class="flow-node" height="58" rx="14" width="150" x="708" y="46"></rect><text class="flow-label" text-anchor="middle" x="783" y="70">Run agents</text><text class="flow-sub" text-anchor="middle" x="783" y="88">repeat N times</text>
+<rect class="flow-node" height="58" rx="14" width="150" x="708" y="218"></rect><text class="flow-label" text-anchor="middle" x="783" y="242">Metrics</text><text class="flow-sub" text-anchor="middle" x="783" y="260">quality · cost · latency</text>
+<rect class="flow-node-accent" height="58" rx="14" width="150" x="500" y="218"></rect><text class="flow-label" text-anchor="middle" x="575" y="242">Improve</text><text class="flow-sub" text-anchor="middle" x="575" y="260">prompt · policy · model</text>
+<path class="flow-arrow" d="M650,75 L706,75" style="stroke:var(--accent);marker-end:url(#optArrow)"></path><path class="flow-arrow" d="M783,104 L783,216" style="stroke:var(--accent);marker-end:url(#optArrow)"></path><path class="flow-arrow" d="M708,247 L652,247" style="stroke:var(--accent);marker-end:url(#optArrow)"></path><path class="flow-arrow flow-dash" d="M575,216 L575,106" style="stroke:var(--accent);marker-end:url(#optArrow)"></path>
 </svg><div class="diagram-caption">Left: remove irrelevant context before paying for inference. Right: evaluation is a continuous loop, not a one-time demo.</div></div>
-
 <h2 id="existing">2 · Optimizations found in the app</h2>
 <div class="table-wrap"><table><thead><tr><th>Technique</th><th>Where used</th><th>Why it helps</th></tr></thead><tbody>
 <tr><td>CV ≤ 12k characters</td><td>Screening and interview questions</td><td>Caps latency and token cost.</td></tr>
@@ -85,11 +84,10 @@
 <tr><td>Background question generation</td><td>After scheduling</td><td>Removes model wait from the critical user path.</td></tr>
 <tr><td>Async FastAPI + asyncpg</td><td>Backend runtime</td><td>Uses wait time efficiently.</td></tr>
 </tbody></table></div>
-
 <h2 id="cache">3 · Cache by business meaning</h2>
-<div class="code-block" data-reveal>
-  <div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> services/question_cache.py</span><button class="copy-btn">Copy</button></div>
-  <pre><code>async def get_or_generate_questions(interview):
+<div class="code-block" data-reveal="">
+<div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> services/question_cache.py</span><button class="copy-btn">Copy</button></div>
+<pre><code>async def get_or_generate_questions(interview):
     if interview.ai_interview_questions:
         return interview.ai_interview_questions
 
@@ -101,15 +99,13 @@
     return result</code></pre>
 </div>
 <p>A useful cache key should include the inputs that change meaning: CV version, JD version, agent prompt version and model version. Caching only by candidate ID can serve stale results after a new CV or JD.</p>
-
 <h2 id="model-routing">4 · Route tasks to the smallest model that passes evals</h2>
 <div class="ats-decision-grid"><div class="card"><h4>Low-complexity</h4><p>Formatting a JD or summarizing already structured ratings may work on a faster model.</p></div><div class="card"><h4>Higher-complexity</h4><p>Comparative ranking and nuanced evidence extraction may need a stronger model.</p></div><div class="card"><h4>Deterministic work</h4><p>Do not use a model at all for overlap checks, role gates or state transitions.</p></div></div>
 <p>Model routing should be driven by your evaluation data, not by prestige or habit.</p>
-
 <h2 id="eval">5 · Build an evaluation set before tuning</h2>
-<div class="code-block" data-reveal>
-  <div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> evals/screening_eval.py</span><button class="copy-btn">Copy</button></div>
-  <pre><code>from dataclasses import dataclass
+<div class="code-block" data-reveal="">
+<div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span> evals/screening_eval.py</span><button class="copy-btn">Copy</button></div>
+<pre><code>from dataclasses import dataclass
 
 @dataclass
 class ScreeningCase:
@@ -122,11 +118,11 @@ class ScreeningCase:
 async def evaluate_case(case: ScreeningCase):
     result = await screen_candidate(job=case.job, candidate=case.candidate)
     return {
-        &quot;recommendation_ok&quot;: result[&quot;recommendation&quot;] == case.expected_recommendation,
-        &quot;missing_skill_recall&quot;: len(
-            case.required_missing_skills &amp; set(result[&quot;missing_essential_skills&quot;])
+        "recommendation_ok": result["recommendation"] == case.expected_recommendation,
+        "missing_skill_recall": len(
+            case.required_missing_skills &amp; set(result["missing_essential_skills"])
         ) / max(1, len(case.required_missing_skills)),
-        &quot;score&quot;: result[&quot;match_score&quot;],
+        "score": result["match_score"],
     }
 
 # Run every case several times; report mean and variance, not one lucky output.</code></pre>
@@ -139,29 +135,22 @@ async def evaluate_case(case: ScreeningCase):
 <tr><td>Questions</td><td>Grounding, uniqueness, round appropriateness, protected-topic violation rate.</td></tr>
 <tr><td>Feedback summary</td><td>Fact coverage, contradiction rate, recommendation fidelity, reviewer correction rate.</td></tr>
 </tbody></table></div>
-
 <h2 id="ops">6 · Operational metrics</h2>
 <div class="grid grid-3"><div class="card"><h4>Latency</h4><p>p50, p95 and timeout rate per agent and model.</p></div><div class="card"><h4>Cost</h4><p>Input/output tokens, repair-call rate and cost per successful task.</p></div><div class="card"><h4>Reliability</h4><p>Success, degraded, failure and manual-fallback usage.</p></div><div class="card"><h4>Quality</h4><p>Eval pass rate and human correction rate by prompt version.</p></div><div class="card"><h4>Drift</h4><p>Score distribution and output-field changes after model upgrades.</p></div><div class="card"><h4>Safety</h4><p>Injection test pass rate, policy violations and sensitive-output incidents.</p></div></div>
-
 <h2 id="testing">7 · Testing pyramid for agents</h2>
 <div class="timeline"><div class="step"><h4>Unit tests — many</h4><p>Prompt builders, fence stripping, overlap logic, Pydantic bounds, privacy transforms.</p></div><div class="step"><h4>Contract tests — moderate</h4><p>Mock provider responses: valid JSON, fenced JSON, malformed JSON, 429, timeout, schema drift.</p></div><div class="step"><h4>Evaluation tests — regular</h4><p>Human-labeled cases across normal, edge and adversarial inputs.</p></div><div class="step"><h4>Live smoke tests — few</h4><p>A tiny real API call verifies credentials, model access and durable run logging.</p></div></div>
-
 <h2 id="quiz">8 · Knowledge check</h2>
 <div class="quiz"><div class="q">What is the best cache key for resume screening?</div><label class="opt">Candidate name only</label><label class="opt">Application ID only forever</label><label class="opt" data-correct="true">A key including candidate/CV version, JD version, prompt version and model</label><div class="explain">Meaning changes when any of those inputs change. Good cache invalidation follows business semantics.</div></div>
 
-        <div class="complete-bar ats-complete-bar">
-  <div><strong>Finished this lesson?</strong><p>Mark it complete. Your ATS Lab progress stays in this browser.</p></div>
-  <button class="btn" type="button" data-ats-complete>Mark lesson complete</button>
+<div class="page-nav"><a href="05-production-safety.html"><div class="dir">← Previous</div><div class="ttl">05 · Production safety</div></a><a class="next" href="07-build-from-scratch.html"><div class="dir">Next →</div><div class="ttl">07 · Build from scratch</div></a></div>
+</main>
+<div class="toc-rail"><nav class="toc"></nav></div>
 </div>
-        <div class="page-nav"><a href="05-production-safety.html"><div class="dir">← Previous</div><div class="ttl">05 · Production safety</div></a><a class="next" href="07-build-from-scratch.html"><div class="dir">Next →</div><div class="ttl">07 · Build from scratch</div></a></div>
-      </main>
-      <div class="toc-rail"><nav class="toc"></nav></div>
-    </div>
-  </div>
+</div>
 </div>
 <script src="../assets/app.js"></script>
 <script src="../assets/sitenav.js"></script>
 <script src="../assets/enhance.js"></script>
-<script src="../assets/ats-lab.js"></script>
+
 </body>
 </html>

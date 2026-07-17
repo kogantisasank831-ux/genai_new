@@ -1,10 +1,5 @@
 (function(){
   'use strict';
-  var KEY='google-prep-v1';
-  var state={tasks:{},track:'python',hours:'10'};
-  try{state=Object.assign(state,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
-  state.tasks=state.tasks||{};
-  var boxes=[].slice.call(document.querySelectorAll('[data-task]'));
   var track=document.querySelector('[data-track]');
   var hours=document.querySelector('[data-hours]');
   var prompts={
@@ -39,31 +34,50 @@
       'Explain an API or data pipeline you worked on as if I am inheriting it tomorrow: contracts, dependencies, failure modes, tests, monitoring and unresolved debt.'
     ]
   };
-  function save(){localStorage.setItem(KEY,JSON.stringify(state));}
-  boxes.forEach(function(b){b.checked=!!state.tasks[b.dataset.task];b.addEventListener('change',function(){state.tasks[b.dataset.task]=b.checked;save();render();});});
-  track.value=state.track||'python'; hours.value=state.hours||'10';
-  track.addEventListener('change',function(){state.track=track.value;save();render();});
-  hours.addEventListener('change',function(){state.hours=hours.value;save();renderWeek();});
-  document.querySelector('[data-reset-progress]').addEventListener('click',function(){if(confirm('Reset all Google preparation progress?')){state.tasks={};boxes.forEach(function(b){b.checked=false;});save();render();}});
-  document.querySelectorAll('[data-prompt]').forEach(function(btn){btn.addEventListener('click',function(){var type=btn.dataset.prompt;var list=prompts[type];var text=list[Math.floor(Math.random()*list.length)];var box=document.querySelector('[data-prompt-box]');box.hidden=false;box.querySelector('[data-prompt-type]').textContent=btn.closest('article').querySelector('h3').textContent;box.querySelector('[data-prompt-text]').textContent=text;box.scrollIntoView({behavior:'smooth',block:'center'});});});
-  document.querySelector('[data-close-prompt]').addEventListener('click',function(){document.querySelector('[data-prompt-box]').hidden=true;});
-  function render(){
-    document.querySelectorAll('[data-track-panel]').forEach(function(p){p.hidden=p.dataset.trackPanel!==state.track;});
-    document.querySelectorAll('[data-phase]').forEach(function(p){var bs=[].slice.call(p.querySelectorAll('[data-task]'));var done=bs.filter(function(b){return b.checked;}).length;var pct=Math.round(done/bs.length*100);p.querySelector('[data-phase-pct]').textContent=pct+'%';p.classList.toggle('complete',pct===100);});
-    var done=boxes.filter(function(b){return b.checked;}).length;var score=Math.round(done/boxes.length*100);document.querySelector('[data-readiness-score]').textContent=score;document.querySelector('[data-score-ring]').style.setProperty('--score',score*3.6+'deg');
-    var gates=['gate-ai-off','gate-medium','gate-project','gate-design','gate-stories','gate-mocks'];var gd=gates.filter(function(k){return state.tasks[k];}).length;var verdict=document.querySelector('[data-verdict]');
-    if(gd===6) verdict.textContent='Application-ready signal: begin targeted applications and maintain mock-interview cadence.';
-    else if(gd>=4) verdict.textContent='Mock-loop stage: close the remaining readiness gaps before broad applications.';
-    else if(gd>=2) verdict.textContent='Skill-integration stage: combine DSA, project work and structured interview practice.';
-    else verdict.textContent='Foundation stage: do not optimize for applications yet. Optimize for independent coding.';
-    renderWeek();
+
+  function renderTrack(){
+    var value=track ? track.value : 'python';
+    document.querySelectorAll('[data-track-panel]').forEach(function(panel){
+      panel.hidden=panel.getAttribute('data-track-panel')!==value;
+    });
   }
+
   function renderWeek(){
-    var h=parseInt(state.hours||10,10);var plan=[];
-    if(!state.tasks['py-api']) plan=[['Python without AI',Math.round(h*.4),'Implement, test and debug one small program or API.'],['DSA foundations',Math.round(h*.35),'Study one pattern and solve 3–4 problems.'],['Review',Math.max(1,Math.round(h*.15)),'Rebuild one solution from memory and record mistakes.'],['Resume evidence',Math.max(1,h-Math.round(h*.4)-Math.round(h*.35)-Math.max(1,Math.round(h*.15))),'Explain one real project aloud.']];
-    else if(!state.tasks['dsa-100']) plan=[['Timed DSA',Math.round(h*.45),'Two focused sessions plus one timed problem.'],['Backend engineering',Math.round(h*.3),'Advance the production Python project.'],['Python drills',Math.max(1,Math.round(h*.15)),'Debug, refactor or test without AI.'],['Behavioural',Math.max(1,h-Math.round(h*.45)-Math.round(h*.3)-Math.max(1,Math.round(h*.15))),'Draft and rehearse one STAR story.']];
-    else plan=[['Coding mocks',Math.round(h*.35),'Timed interview problems with verbal explanation.'],['System design',Math.round(h*.3),'One component lesson and one design.'],['Project depth',Math.round(h*.2),'Measure, test or harden your project.'],['Behavioural + resume',Math.max(1,h-Math.round(h*.35)-Math.round(h*.3)-Math.round(h*.2)),'Record two answers and critique them.']];
-    document.querySelector('[data-week-plan]').innerHTML=plan.map(function(x){return '<article><b>'+x[1]+'h</b><div><h3>'+x[0]+'</h3><p>'+x[2]+'</p></div></article>';}).join('');
+    var host=document.querySelector('[data-week-plan]');
+    if(!host) return;
+    var h=parseInt(hours ? hours.value : '10',10);
+    var value=track ? track.value : 'python';
+    var plan;
+    if(value==='ml'){
+      plan=[['Python and DSA',Math.round(h*.35),'Timed Python practice and one DSA pattern.'],['ML/data systems',Math.round(h*.30),'Model serving, pipelines, storage or distributed processing.'],['System design',Math.round(h*.20),'One component lesson or timed architecture drill.'],['Interview stories',Math.max(1,h-Math.round(h*.35)-Math.round(h*.30)-Math.round(h*.20)),'Rehearse project ownership and behavioural evidence.']];
+    }else if(value==='dual'){
+      plan=[['Python and DSA',Math.round(h*.40),'Core coding fluency shared by both tracks.'],['Backend engineering',Math.round(h*.22),'API, database, testing or concurrency practice.'],['ML/data systems',Math.round(h*.22),'One specialized systems topic.'],['Mocks and review',Math.max(1,h-Math.round(h*.40)-Math.round(h*.22)-Math.round(h*.22)),'Timed answer practice and error review.']];
+    }else{
+      plan=[['Python without AI',Math.round(h*.35),'Implement, test and debug one small program or API.'],['DSA patterns',Math.round(h*.35),'Study one pattern and solve several problems.'],['Backend/system design',Math.round(h*.20),'Advance a service or practise one design component.'],['Behavioural review',Math.max(1,h-Math.round(h*.35)-Math.round(h*.35)-Math.round(h*.20)),'Explain one real project or STAR story aloud.']];
+    }
+    host.innerHTML=plan.map(function(item){return '<article><b>'+item[1]+'h</b><div><h3>'+item[0]+'</h3><p>'+item[2]+'</p></div></article>';}).join('');
   }
-  render();
+
+  if(track){track.addEventListener('change',function(){renderTrack();renderWeek();});}
+  if(hours){hours.addEventListener('change',renderWeek);}
+
+  document.querySelectorAll('[data-prompt]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var list=prompts[btn.getAttribute('data-prompt')];
+      if(!list) return;
+      var box=document.querySelector('[data-prompt-box]');
+      if(!box) return;
+      box.hidden=false;
+      var type=box.querySelector('[data-prompt-type]');
+      var text=box.querySelector('[data-prompt-text]');
+      if(type){var article=btn.closest('article');type.textContent=article&&article.querySelector('h3')?article.querySelector('h3').textContent:'Practice prompt';}
+      if(text) text.textContent=list[Math.floor(Math.random()*list.length)];
+      box.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  });
+  var close=document.querySelector('[data-close-prompt]');
+  if(close) close.addEventListener('click',function(){var box=document.querySelector('[data-prompt-box]');if(box)box.hidden=true;});
+
+  renderTrack();
+  renderWeek();
 })();

@@ -2,7 +2,6 @@
 (function () {
   'use strict';
 
-  var STORE_KEY = 'genai-interview-prep-progress-v1';
   var SCENARIOS = [
     '01-enterprise-knowledge-assistant.html',
     '02-customer-support-agent.html',
@@ -13,73 +12,6 @@
     '07-high-scale-shopping-assistant.html',
     '08-regulated-financial-research.html'
   ];
-
-  function readProgress() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; }
-    catch (_) { return {}; }
-  }
-
-  function writeProgress(value) {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(value)); }
-    catch (_) { /* Private browsing can disable storage. */ }
-  }
-
-  function isDone(key) { return !!readProgress()[key]; }
-
-  function updateCompletionUI() {
-    var progress = readProgress();
-    document.querySelectorAll('[data-prep-complete]').forEach(function (button) {
-      var key = button.getAttribute('data-key');
-      var done = !!progress[key];
-      button.classList.toggle('is-complete', done);
-      button.setAttribute('aria-pressed', done ? 'true' : 'false');
-      button.textContent = done ? 'Completed ✓' : (key && key.indexOf('scenario-') === 0 ? 'Mark scenario complete' : 'Mark topic complete');
-    });
-
-    document.querySelectorAll('[data-progress-key]').forEach(function (card) {
-      var done = !!progress[card.getAttribute('data-progress-key')];
-      card.classList.toggle('is-complete', done);
-      var badge = card.querySelector('.prep-done-badge');
-      if (done && !badge) {
-        badge = document.createElement('span');
-        badge.className = 'prep-done-badge';
-        badge.textContent = 'Ready ✓';
-        card.querySelector('div').appendChild(badge);
-      } else if (!done && badge) {
-        badge.remove();
-      }
-    });
-
-    document.querySelectorAll('[data-prep-progress]').forEach(function (orb) {
-      var type = orb.getAttribute('data-prep-progress');
-      var prefix = type === 'scenario' ? 'scenario-' : 'topic-';
-      var total = 8;
-      var complete = Object.keys(progress).filter(function (key) { return key.indexOf(prefix) === 0 && progress[key]; }).length;
-      var pct = Math.round((complete / total) * 100);
-      var strong = orb.querySelector('strong');
-      if (strong) strong.textContent = pct + '%';
-      orb.style.setProperty('--prep-progress', pct + '%');
-      orb.setAttribute('aria-label', complete + ' of ' + total + ' completed');
-    });
-  }
-
-  function setupCompletion() {
-    document.querySelectorAll('[data-prep-complete]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        var key = button.getAttribute('data-key');
-        var progress = readProgress();
-        progress[key] = !progress[key];
-        writeProgress(progress);
-        updateCompletionUI();
-        button.animate([
-          { transform: 'scale(.96)' },
-          { transform: 'scale(1.03)' },
-          { transform: 'scale(1)' }
-        ], { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)' });
-      });
-    });
-    updateCompletionUI();
-  }
 
   function setupQuestionFilter() {
     var input = document.querySelector('[data-question-filter]');
@@ -204,7 +136,6 @@
   }
 
   function init() {
-    setupCompletion();
     setupQuestionFilter();
     setupExpandAnswers();
     setupRandomScenario();

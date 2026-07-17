@@ -1,7 +1,7 @@
 /* =========================================================================
    GenAI Mastery Portal — App Logic
-   Theme toggle · search · progress tracking · quizzes · copy · demos · TOC
-   Pure vanilla JS. No dependencies. Works offline (uses localStorage).
+   Theme toggle · search · quizzes · copy · demos · TOC
+   Pure vanilla JS. No dependencies. Works offline.
    ========================================================================= */
 (function () {
   "use strict";
@@ -43,7 +43,6 @@
 
   const TRACKS = ["Foundations", "Retrieval", "Agents", "Frameworks", "Production"];
   const LS_THEME = "gp.theme";
-  const LS_DONE = "gp.completed";
 
   function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
   function safeSet(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
@@ -64,16 +63,6 @@
   // apply ASAP
   document.documentElement.setAttribute("data-theme", getTheme());
 
-  /* ---------- Completion tracking ---------- */
-  function getDone() { try { return JSON.parse(safeGet(LS_DONE) || "[]"); } catch { return []; } }
-  function setDone(arr) { safeSet(LS_DONE, JSON.stringify(arr)); }
-  function isDone(id) { return getDone().includes(id); }
-  function toggleDone(id) {
-    let d = getDone();
-    if (d.includes(id)) d = d.filter(x => x !== id); else d.push(id);
-    setDone(d); return d.includes(id);
-  }
-
   /* ---------- Build sidebar ----------
      The unified sidebar is now owned by sitenav.js (shared across the whole
      site). When it is present we skip app.js's own module-only sidebar so the
@@ -83,14 +72,12 @@
     const nav = document.querySelector(".nav");
     if (!nav) return;
     const cur = document.body.getAttribute("data-page") || "";
-    const done = getDone();
     let html = `<a href="index.html" class="${cur === '00' ? 'active' : ''}"><span class="num">＊</span> Overview</a>`;
     TRACKS.forEach(track => {
       html += `<div class="nav-group-label">${track}</div>`;
       MODULES.filter(m => m.track === track).forEach(m => {
         const active = m.id === cur ? "active" : "";
-        const dc = done.includes(m.id) ? "done" : "";
-        html += `<a href="${m.file}" class="${active} ${dc}"><span class="num">${m.id}</span> ${m.title}</a>`;
+        html += `<a href="${m.file}" class="${active}"><span class="num">${m.id}</span> ${m.title}</a>`;
       });
     });
     nav.innerHTML = html;
@@ -192,30 +179,6 @@
     });
   }
 
-  /* ---------- Mark complete + progress ---------- */
-  function setupCompletion() {
-    const cur = document.body.getAttribute("data-page");
-    const btn = document.querySelector("[data-complete]");
-    if (btn && cur) {
-      const sync = () => {
-        const d = isDone(cur);
-        btn.textContent = d ? "✓ Completed — click to undo" : "Mark module complete";
-        btn.classList.toggle("ghost", d);
-      };
-      sync();
-      btn.addEventListener("click", () => { toggleDone(cur); sync(); buildSidebar(); updateProgress(); });
-    }
-    updateProgress();
-  }
-  function updateProgress() {
-    const total = MODULES.filter(m => m.id !== "00").length;
-    const done = getDone().filter(id => id !== "00").length;
-    const pct = Math.round((done / total) * 100);
-    document.querySelectorAll("[data-progress-fill]").forEach(el => el.style.width = pct + "%");
-    document.querySelectorAll("[data-progress-pct]").forEach(el => el.textContent = pct + "%");
-    document.querySelectorAll("[data-progress-count]").forEach(el => el.textContent = `${done} / ${total} modules`);
-  }
-
   /* ---------- Mobile nav ----------
      The ☰ button itself is wired by sitenav.js (it collapses the sidebar on
      desktop and opens the drawer on mobile). Here we only handle the backdrop
@@ -298,7 +261,6 @@
   function buildIndexGrid() {
     const host = document.querySelector("[data-module-grid]");
     if (!host) return;
-    const done = getDone();
     const descs = {
       "01": "How LLMs predict the next token, context windows, decoding, and where they fit in your stack.",
       "02": "Self-attention, multi-head attention, positional encoding — the engine inside every LLM.",
@@ -320,9 +282,8 @@
     TRACKS.forEach(track => {
       html += `<div class="track-label"><span>${track}</span><div class="line"></div></div><div class="module-grid">`;
       MODULES.filter(m => m.track === track).forEach(m => {
-        const d = done.includes(m.id);
         html += `<a href="${m.file}" class="card hover module-card" data-reveal>
-          <div class="mc-top"><span class="mc-num">Module ${m.id}</span>${d ? '<span class="pill green">Done ✓</span>' : '<span class="pill">Start →</span>'}</div>
+          <div class="mc-top"><span class="mc-num">Module ${m.id}</span><span class="pill">Open →</span></div>
           <h3>${m.title}</h3><p>${descs[m.id] || ""}</p></a>`;
       });
       html += `</div>`;
@@ -359,7 +320,6 @@
     buildTOC();
     setupCopy();
     setupQuizzes();
-    setupCompletion();
     setupMobileNav();
     setupDemos();
     setupReveal();
