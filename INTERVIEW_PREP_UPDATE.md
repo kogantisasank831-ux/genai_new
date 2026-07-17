@@ -4,11 +4,11 @@ This build adds two integrated learning sections to the GenAI Learning Hub.
 
 ## GenAI Interview Question Bank
 
-- 80 focused questions across 8 topics
+- 107 focused questions across 10 topics
 - Concise strong answers, 30-second versions and likely follow-ups
 - Topic filtering, open/close all, keyboard navigation and saved progress
 - Animated SVG explainers for RAG, agents, LLMOps and security
-- Coverage: foundations, prompting, RAG, agents, MCP, LangGraph, evaluation, LLMOps, production performance, security, Python/FastAPI/cloud and project discussions
+- Coverage: foundations, prompting, RAG, agents, MCP, LangGraph, evaluation, LLMOps, production performance, security, Python/FastAPI/cloud, project discussions and SQL/data systems for GenAI roles
 
 ## Scenario Design Studio
 
